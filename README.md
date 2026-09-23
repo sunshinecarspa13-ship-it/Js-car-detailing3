@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JS Car Detailing Colchester
 
-## Getting Started
+Marketing site for JS Car Detailing Colchester — a mobile car detailing
+business. Next.js 16 (App Router), TypeScript, Tailwind CSS v4.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`npm run build && npm run start` runs a production build.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where things live
 
-## Learn More
+- `lib/data/business.ts` — single source of truth for every verified
+  business fact (name, address, phone, rating, hours, service area). Every
+  other file reads from here rather than re-typing facts.
+- `lib/data/services.ts`, `lib/data/areas.ts`, `lib/data/reviews.ts`,
+  `lib/data/faq.ts` — typed content for the five services, four service
+  areas, all 15 Google reviews (verbatim), and FAQ copy.
+- `lib/data/site.ts` — technical config (site URL). Not a business fact.
+- `components/schema/*` — JSON-LD structured data (LocalBusiness/
+  AutoDetailing, Service, FAQPage, BreadcrumbList).
+- `app/llms.txt/route.ts` — machine-readable summary for AI
+  crawlers/agents, generated from the same data files.
 
-To learn more about Next.js, take a look at the following resources:
+## Before launch — outstanding items for the client
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Everything below was left as a clearly marked placeholder rather than
+guessed, per the brief. Search the codebase for `{{PLACEHOLDER` to find
+every instance.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Closing time** — hours are shown as "opens 8am, 7 days a week" only;
+  closing time was never confirmed. Update `business.hours.closes` in
+  `lib/data/business.ts` once known, and add `openingHoursSpecification`
+  back into `components/schema/LocalBusinessSchema.tsx` (deliberately
+  omitted until then).
+- **Instagram handle** — `business.social.instagram` is `null`. No social
+  link currently appears on the site.
+- **Business email** — not supplied; the contact form currently only logs
+  submissions server-side (see `app/api/contact/route.ts`). Wire it to a
+  real email/webhook/CRM before launch.
+- **Pricing** — no price list was supplied. Every service page says "get a
+  quote" instead of a number.
+- **Real photography** — the hero, gallery, and OG image are placeholder
+  gradients/text, not stock photos standing in as the business's own work.
+  Swap in real before/after photos via `next/image` once supplied
+  (`components/ui/SheenPanel.tsx`, `app/gallery/page.tsx`).
+- **4 reviews with no captured text** (Diego Rodrigues, Farliane Vieira,
+  Leidiane Bento, Josiane Promotora, Rhaonny Paiva — 5 total) — these
+  count toward the 5.0★/15 rating but aren't quoted anywhere, since no
+  text was captured from Google. Add their text in `lib/data/reviews.ts`
+  if it becomes available.
+- **Truncated reviews** (Remerson, Falcon, Robert M) — shown exactly as
+  truncated on Google ("…"). Fill in the rest in `lib/data/reviews.ts` if
+  the full text is obtained.
+- **Production domain** — `NEXT_PUBLIC_SITE_URL` env var is unset, so
+  `lib/data/site.ts` falls back to a placeholder domain. Set the real one
+  before deploying (it feeds canonical URLs, sitemap, and JSON-LD).
+- **Business registration/insurance number** — not supplied; not shown
+  anywhere on the site currently.
+- **Schema validation** — JSON-LD blocks were built to spec but should be
+  run through Google's Rich Results Test against the live, deployed URL
+  before launch.
 
-## Deploy on Vercel
+## Notes on a couple of deliberate choices
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No CMS — content lives in typed files under `lib/data/`. Structured so
+  a headless CMS could be swapped in later without touching components.
+- No `next/image` usage yet — there are no real photos to serve. Once
+  photography is supplied, use `next/image` for it (don't add stock
+  photography in the meantime).
