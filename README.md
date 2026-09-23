@@ -3,6 +3,13 @@
 Marketing site for JS Car Detailing Colchester — a mobile car detailing
 business. Next.js 16 (App Router), TypeScript, Tailwind CSS v4.
 
+## Deployment
+
+- **Live:** https://js-car-detailing-colchester.vercel.app
+- **Repo:** https://github.com/sunshinecarspa13-ship-it/js-car-detailing-colchester (private)
+- Connected for auto-deploy: pushes to `master` deploy to production
+  automatically; other branches/PRs get preview deployments.
+
 ## Getting started
 
 ```bash
