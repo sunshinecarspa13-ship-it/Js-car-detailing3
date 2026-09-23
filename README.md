@@ -6,9 +6,25 @@ business. Next.js 16 (App Router), TypeScript, Tailwind CSS v4.
 ## Deployment
 
 - **Live:** https://js-car-detailing-colchester.vercel.app
-- **Repo:** https://github.com/sunshinecarspa13-ship-it/js-car-detailing-colchester (private)
+- **Repo:** https://github.com/sunshinecarspa13-ship-it/js-car-detailing (public)
 - Connected for auto-deploy: pushes to `master` deploy to production
   automatically; other branches/PRs get preview deployments.
+- Git commits must be authored as `sunshinecarspa13-ship-it` (or with the
+  `@users.noreply.github.com` email for that account) or Vercel blocks the
+  deployment — see "Committers without a Vercel account" in Vercel's docs.
+
+## Admin dashboard
+
+- **URL:** `/admin` (redirects to `/admin/login` if not authenticated)
+- Password is stored in the `ADMIN_PASSWORD` Vercel env var (all
+  environments) — not in the codebase. Change it any time via
+  `vercel env rm ADMIN_PASSWORD <env>` then `vercel env add`.
+- Session is a signed, expiring cookie (12h), HMAC'd with
+  `ADMIN_SESSION_SECRET`. No user accounts/database — single shared
+  password, intended for the business owner only.
+- Bookings submitted at `/book` are stored in Vercel Blob
+  (`lib/booking/store.ts`) as one JSON object per booking. The admin
+  dashboard lists them and can update status or delete.
 
 ## Getting started
 
@@ -34,6 +50,12 @@ Open [http://localhost:3000](http://localhost:3000).
   AutoDetailing, Service, FAQPage, BreadcrumbList).
 - `app/llms.txt/route.ts` — machine-readable summary for AI
   crawlers/agents, generated from the same data files.
+- `app/(marketing)/` — all public pages, wrapped in
+  `app/(marketing)/layout.tsx` (header, footer, sticky mobile CTA bar).
+- `app/admin/` — password-protected bookings dashboard, guarded by
+  `proxy.ts`. Has its own minimal layout (no marketing chrome).
+- `lib/booking/` — booking types + Vercel Blob storage functions.
+- `lib/auth/admin-session.ts` — signed-cookie session helpers for admin.
 
 ## Before launch — outstanding items for the client
 
