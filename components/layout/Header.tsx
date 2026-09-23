@@ -43,7 +43,7 @@ export function Header() {
             <Phone className="h-4 w-4 text-accent" aria-hidden />
             {business.phone.display}
           </a>
-          <Button href="/contact" size="md">
+          <Button href="/book" size="md">
             Book Now
           </Button>
         </div>
@@ -79,7 +79,7 @@ export function Header() {
               <Phone className="h-4 w-4" aria-hidden />
               {business.phone.display}
             </a>
-            <Button href="/contact" className="mt-2 w-full" onClick={() => setOpen(false)}>
+            <Button href="/book" className="mt-2 w-full" onClick={() => setOpen(false)}>
               Book Now
             </Button>
           </Container>

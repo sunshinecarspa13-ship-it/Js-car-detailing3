@@ -29,7 +29,7 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href="/contact" size="lg">
+            <Button href="/book" size="lg">
               <CalendarDays className="h-5 w-5" aria-hidden />
               Book Your Detail
             </Button>

@@ -16,7 +16,7 @@ export function MobileCtaBar() {
       </a>
       <div className="w-px bg-border" />
       <a
-        href="/contact"
+        href="/book"
         className="flex flex-1 items-center justify-center gap-2 bg-accent py-3.5 text-sm font-semibold text-accent-foreground active:bg-accent-hover"
       >
         <Calendar className="h-4 w-4" aria-hidden />
