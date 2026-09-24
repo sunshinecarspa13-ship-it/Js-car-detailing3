@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -13,12 +14,12 @@ const breadcrumbItems = [
   { name: "FAQ", path: "/faq" },
 ];
 
-export const metadata: Metadata = {
-  title: "Frequently Asked Questions",
+export const metadata: Metadata = pageMetadata({
+  title: "Car Detailing FAQs",
   description:
-    "Answers to common questions about JS Car Detailing Colchester's mobile car detailing service — pricing, coverage area, insurance, and booking.",
-  alternates: { canonical: "/faq" },
-};
+    "Answers to common questions about mobile car detailing with JS Car Detailing Colchester — pricing, areas covered, insurance and how booking works.",
+  path: "/faq",
+});
 
 const allFaqs = [...generalFaqs, ...services.flatMap((s) => s.faqs)];
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Droplets, Sparkles, Armchair, Shield, Lightbulb, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -21,12 +22,12 @@ const breadcrumbItems = [
   { name: "Services", path: "/services" },
 ];
 
-export const metadata: Metadata = {
-  title: "Mobile Car Detailing Services",
+export const metadata: Metadata = pageMetadata({
+  title: "Car Detailing Services",
   description:
-    "Exterior wash, deep clean, interior clean, paint protection, and headlight restoration — fully mobile detailing services from JS Car Detailing Colchester.",
-  alternates: { canonical: "/services" },
-};
+    "Mobile exterior washes, deep cleans, interior cleans, paint protection and headlight restoration — detailing services from JS Car Detailing Colchester.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

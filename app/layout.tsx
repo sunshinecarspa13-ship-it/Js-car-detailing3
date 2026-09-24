@@ -21,7 +21,8 @@ export const metadata: Metadata = {
     default: `${siteConfig.name} | Mobile Car Detailing`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: siteConfig.metaDescription,
+  applicationName: siteConfig.name,
   keywords: [
     "mobile car detailing Colchester",
     "car valeting Colchester",
@@ -35,12 +36,12 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Mobile Car Detailing`,
-    description: siteConfig.description,
+    description: siteConfig.metaDescription,
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | Mobile Car Detailing`,
-    description: siteConfig.description,
+    description: siteConfig.metaDescription,
   },
   alternates: {
     canonical: "/",
@@ -48,6 +49,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: [
@@ -62,7 +70,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="en-GB"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg text-fg">{children}</body>

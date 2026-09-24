@@ -1,30 +1,24 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { BreadcrumbSchema } from "@/components/schema/BreadcrumbSchema";
+import { galleryPhotos } from "@/lib/data/gallery";
 
-const photos = [
-  { src: "/gallery/snow-foam-wash.jpg", width: 995, height: 1079, alt: "Grey hatchback before and during a snow foam exterior wash", caption: "Snow foam exterior wash" },
-  { src: "/gallery/rear-seat-clean.jpg", width: 1080, height: 872, alt: "Rear seats before and after a deep interior clean", caption: "Rear seat deep clean" },
-  { src: "/gallery/seat-stain-removal.jpg", width: 861, height: 972, alt: "Front seats before and after stain removal", caption: "Seat stain removal" },
-  { src: "/gallery/smart-exterior-before-after.jpg", width: 1035, height: 880, alt: "White Smart car before and after an exterior detail", caption: "Exterior detail" },
-  { src: "/gallery/smart-exterior-finish.jpg", width: 1080, height: 1569, alt: "White Smart car with a finished gloss exterior", caption: "Gloss finish" },
-  { src: "/gallery/red-car-rear-interior.png", width: 243, height: 304, alt: "Red car rear interior before and after cleaning", caption: "Interior valet" },
-];
 
 const breadcrumbItems = [
   { name: "Home", path: "/" },
   { name: "Gallery", path: "/gallery" },
 ];
 
-export const metadata: Metadata = {
-  title: "Gallery",
+export const metadata: Metadata = pageMetadata({
+  title: "Before & After Gallery",
   description:
-    "Before-and-after gallery of mobile car detailing work by JS Car Detailing Colchester.",
-  alternates: { canonical: "/gallery" },
-};
+    "Real before-and-after photos of mobile car detailing by JS Car Detailing Colchester — snow foam washes, interior deep cleans and seat stain removal.",
+  path: "/gallery",
+});
 
 export default function GalleryPage() {
   return (
@@ -40,7 +34,7 @@ export default function GalleryPage() {
       <section className="pb-16 sm:pb-24">
         <Container>
           <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
-            {photos.map((photo) => (
+            {galleryPhotos.map((photo) => (
               <figure
                 key={photo.src}
                 className="mb-5 break-inside-avoid overflow-hidden rounded-3xl border border-border-strong bg-bg-elevated"

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ShieldCheck, MapPinned, MessageCircleReply, CalendarClock } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -12,12 +13,12 @@ const breadcrumbItems = [
   { name: "About", path: "/about" },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description:
-    "About JS Car Detailing Colchester — a fully insured, fully mobile car detailing service rated 5.0★ from 15 Google reviews across Colchester and Essex.",
-  alternates: { canonical: "/about" },
-};
+    "Meet JS Car Detailing Colchester — a fully insured, fully mobile car detailing service rated 5.0★ from 15 Google reviews, working across Colchester and Essex.",
+  path: "/about",
+});
 
 const pillars = [
   {

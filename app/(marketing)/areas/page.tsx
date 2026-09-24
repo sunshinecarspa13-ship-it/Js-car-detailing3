@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -14,12 +15,12 @@ const breadcrumbItems = [
   { name: "Areas We Cover", path: "/areas" },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Areas We Cover",
   description:
-    "JS Car Detailing Colchester is fully mobile across Colchester, Ipswich, Clacton-on-Sea, Chelmsford, and the surrounding Essex and Suffolk areas.",
-  alternates: { canonical: "/areas" },
-};
+    "Mobile car detailing across Colchester, Ipswich, Clacton-on-Sea, Chelmsford and the surrounding Essex and Suffolk areas — we come to your home or workplace.",
+  path: "/areas",
+});
 
 export default function AreasPage() {
   return (

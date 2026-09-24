@@ -5,13 +5,29 @@ business. Next.js 16 (App Router), TypeScript, Tailwind CSS v4.
 
 ## Deployment
 
-- **Live:** https://js-car-detailing-colchester.vercel.app
-- **Repo:** https://github.com/sunshinecarspa13-ship-it/js-car-detailing (public)
+- **Live:** https://jsdetailingcolchester.co.uk (canonical domain).
+  `www.` and `js-car-detailing-2b36.vercel.app` 308-redirect to it
+  (`next.config.ts`).
+- **Vercel project:** `js-car-detailing-2b36` (team `js-car-detailing`)
+- **Repo:** https://github.com/sunshinecarspa13-ship-it/Js-car-detailing3 (public)
 - Connected for auto-deploy: pushes to `master` deploy to production
   automatically; other branches/PRs get preview deployments.
 - Git commits must be authored as `sunshinecarspa13-ship-it` (or with the
   `@users.noreply.github.com` email for that account) or Vercel blocks the
   deployment — see "Committers without a Vercel account" in Vercel's docs.
+
+## SEO & indexing
+
+- Canonicals, sitemap, robots and JSON-LD all derive from `SITE_URL` in
+  `lib/data/site.ts` (defaults to `https://jsdetailingcolchester.co.uk`).
+- Per-page titles/descriptions/Open Graph go through `pageMetadata()` in
+  `lib/seo.ts`. Keep descriptions ≤160 characters.
+- **IndexNow** (Bing, Yandex, Seznam, Naver — not Google): after a deploy
+  that adds or changes pages, run `npm run indexnow` (all sitemap URLs) or
+  `npm run indexnow -- /faq /book` (specific paths). Key file:
+  `public/f35ab2a852e4359d9f0be682bd73d9b7.txt`.
+- **Google:** submit `https://jsdetailingcolchester.co.uk/sitemap.xml` in
+  Search Console and use URL Inspection → Request indexing for key pages.
 
 ## Admin dashboard
 
@@ -87,9 +103,6 @@ every instance.
 - **Truncated reviews** (Remerson, Falcon, Robert M) — shown exactly as
   truncated on Google ("…"). Fill in the rest in `lib/data/reviews.ts` if
   the full text is obtained.
-- **Production domain** — `NEXT_PUBLIC_SITE_URL` env var is unset, so
-  `lib/data/site.ts` falls back to a placeholder domain. Set the real one
-  before deploying (it feeds canonical URLs, sitemap, and JSON-LD).
 - **Business registration/insurance number** — not supplied; not shown
   anywhere on the site currently.
 - **Schema validation** — JSON-LD blocks were built to spec but should be

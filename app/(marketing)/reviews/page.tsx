@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -15,11 +16,12 @@ const breadcrumbItems = [
   { name: "Reviews", path: "/reviews" },
 ];
 
-export const metadata: Metadata = {
-  title: "Reviews",
-  description: `${business.rating.value.toFixed(1)}★ from ${business.rating.count} Google reviews — read what customers say about JS Car Detailing Colchester.`,
-  alternates: { canonical: "/reviews" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Customer Reviews",
+  description:
+    `${business.rating.value.toFixed(1)}★ from ${business.rating.count} Google reviews — read what customers across Colchester and Essex say about JS Car Detailing Colchester.`,
+  path: "/reviews",
+});
 
 const textlessCount = reviews.length - reviewsWithText.length;
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Phone, MapPin, Clock, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -13,12 +14,12 @@ const breadcrumbItems = [
   { name: "Contact", path: "/contact" },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact & Get a Quote",
   description:
-    "Get a quote from JS Car Detailing Colchester — call +44 7778 902278 or send an enquiry. Fully mobile, 7 days a week, across Colchester, Ipswich, Clacton-on-Sea and Chelmsford.",
-  alternates: { canonical: "/contact" },
-};
+    "Get a free quote from JS Car Detailing Colchester. Call +44 7778 902278 or send an enquiry — fully mobile, 7 days a week across Colchester and Essex.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

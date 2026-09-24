@@ -6,6 +6,8 @@ export type Area = {
   /** Approximate one-way drive time from the Colchester base, traffic dependent. */
   driveTimeFromBase: string;
   directAnswer: string;
+  /** Search-snippet description, ≤160 characters. */
+  metaDescription: string;
   localContext: string;
   servicesNote: string;
 };
@@ -17,6 +19,8 @@ export const areas: Area[] = [
     county: "Essex",
     isBase: true,
     driveTimeFromBase: "Based here",
+    metaDescription:
+      "Mobile car detailing in Colchester — washes, deep cleans, interior cleans and paint protection at your home or workplace. Open 7 days a week from 8am.",
     directAnswer:
       "JS Car Detailing Colchester is based in Colchester, operating from King Edward Quay, and covers the whole town as its home service area. As a fully mobile detailer, appointments are carried out at your home or workplace anywhere in Colchester, seven days a week from 8am.",
     localContext:
@@ -30,6 +34,8 @@ export const areas: Area[] = [
     county: "Suffolk",
     isBase: false,
     driveTimeFromBase: "Approximately 30–40 minutes by road, traffic dependent",
+    metaDescription:
+      "Mobile car detailing in Ipswich — exterior washes, deep cleans, interior cleans and paint protection at your home or workplace. Fully insured, 7 days.",
     directAnswer:
       "Yes — JS Car Detailing Colchester covers Ipswich as part of its regular mobile service area. The team travels from its Colchester base, roughly 30–40 minutes by road, to carry out exterior washes, deep cleans, interior cleans, paint protection, and headlight restoration at your home or workplace in Ipswich.",
     localContext:
@@ -43,6 +49,8 @@ export const areas: Area[] = [
     county: "Essex",
     isBase: false,
     driveTimeFromBase: "Approximately 25–30 minutes by road, traffic dependent",
+    metaDescription:
+      "Mobile car detailing in Clacton-on-Sea — exterior washes, deep cleans, interior cleans and headlight restoration at your door. Fully insured, 7 days.",
     directAnswer:
       "Yes — JS Car Detailing Colchester covers Clacton-on-Sea as part of its mobile service area, around 25–30 minutes from its Colchester base. Exterior washes, deep cleans, interior cleans, paint protection, and headlight restoration are all carried out at your home or workplace in Clacton-on-Sea.",
     localContext:
@@ -56,6 +64,8 @@ export const areas: Area[] = [
     county: "Essex",
     isBase: false,
     driveTimeFromBase: "Approximately 30–40 minutes by road, traffic dependent",
+    metaDescription:
+      "Mobile car detailing in Chelmsford — exterior washes, deep cleans, interior cleans and paint protection at your home or workplace. Fully insured, 7 days.",
     directAnswer:
       "Yes — JS Car Detailing Colchester covers Chelmsford as part of its mobile service area, roughly 30–40 minutes from its Colchester base via the A12. Exterior washes, deep cleans, interior cleans, paint protection, and headlight restoration are all available at your home or workplace in Chelmsford.",
     localContext:

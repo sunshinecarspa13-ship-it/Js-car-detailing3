@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check, ArrowRight } from "lucide-react";
@@ -23,11 +24,11 @@ export async function generateMetadata(
   const service = getServiceBySlug(slug);
   if (!service) return {};
 
-  return {
-    title: service.name,
-    description: service.directAnswer,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+  return pageMetadata({
+    title: `${service.name} Colchester`,
+    description: service.metaDescription,
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage(props: PageProps<"/services/[slug]">) {

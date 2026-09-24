@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Phone, ShieldCheck, CalendarClock } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -12,12 +13,12 @@ const breadcrumbItems = [
   { name: "Book Now", path: "/book" },
 ];
 
-export const metadata: Metadata = {
-  title: "Book Now",
+export const metadata: Metadata = pageMetadata({
+  title: "Book a Mobile Car Detail",
   description:
-    "Book a mobile car detailing appointment with JS Car Detailing Colchester — pick a service, date, and time, and we'll confirm your booking.",
-  alternates: { canonical: "/book" },
-};
+    "Book mobile car detailing online with JS Car Detailing Colchester — choose your service, date and time slot, and we'll confirm your appointment.",
+  path: "/book",
+});
 
 export default function BookPage() {
   return (

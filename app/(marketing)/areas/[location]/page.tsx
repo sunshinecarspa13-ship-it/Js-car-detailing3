@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, MapPin, ArrowRight } from "lucide-react";
@@ -22,11 +23,11 @@ export async function generateMetadata(
   const area = getAreaBySlug(location);
   if (!area) return {};
 
-  return {
+  return pageMetadata({
     title: `Mobile Car Detailing in ${area.name}`,
-    description: area.directAnswer,
-    alternates: { canonical: `/areas/${area.slug}` },
-  };
+    description: area.metaDescription,
+    path: `/areas/${area.slug}`,
+  });
 }
 
 export default async function AreaPage(props: PageProps<"/areas/[location]">) {

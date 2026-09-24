@@ -13,6 +13,8 @@ export type Service = {
    * adjectives — lead with the fact.
    */
   directAnswer: string;
+  /** Search-snippet description, ≤160 characters. */
+  metaDescription: string;
   summary: string;
   bullets: string[];
   idealFor: string;
@@ -25,6 +27,8 @@ export const services: Service[] = [
     slug: "exterior-wash",
     name: "Exterior Wash",
     shortName: "Exterior Wash",
+    metaDescription:
+      "Mobile exterior hand wash in Colchester — bodywork, wheels, arches and glass cleaned safely at your home or workplace. Fully insured, 7 days. Get a quote.",
     directAnswer:
       "JS Car Detailing Colchester's exterior wash is a fully mobile hand wash covering the bodywork, wheels, arches, and glass. It's carried out at your home or workplace across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford, using safe wash methods to avoid marring the paintwork. Get a quote for your vehicle.",
     summary:
@@ -52,7 +56,7 @@ export const services: Service[] = [
       {
         question: "How much does an exterior wash cost near Colchester?",
         answer:
-          "Pricing depends on vehicle size and condition. {{PLACEHOLDER: price list not supplied by client}} — get a quote by phone or the contact form.",
+          "Pricing depends on vehicle size and condition — get a free quote by phone or through the contact form.",
       },
     ],
     icon: "droplets",
@@ -61,6 +65,8 @@ export const services: Service[] = [
     slug: "deep-clean",
     name: "Deep Clean",
     shortName: "Deep Clean",
+    metaDescription:
+      "Full inside-and-out mobile deep clean in Colchester, Ipswich, Clacton-on-Sea and Chelmsford — built-up grime and neglected interiors sorted at your door.",
     directAnswer:
       "A deep clean from JS Car Detailing Colchester is a full inside-and-out detail that goes beyond a standard wash, targeting built-up grime, engine bay dirt, and neglected interiors. It's delivered as a fully mobile service across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford. Get a quote for your vehicle's condition.",
     summary:
@@ -92,6 +98,8 @@ export const services: Service[] = [
     slug: "interior-clean",
     name: "Interior Clean",
     shortName: "Interior Clean",
+    metaDescription:
+      "Mobile car interior cleaning in Colchester — seats, carpets, dashboard and glass cleaned, with stains and odours removed at your home or workplace.",
     directAnswer:
       "JS Car Detailing Colchester's interior clean covers seats, carpets, dashboard, door cards, and glass inside the vehicle, removing dust, stains, and odour sources. The service is fully mobile and carried out across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford at your home or workplace. Get a quote based on your vehicle and interior condition.",
     summary:
@@ -123,6 +131,8 @@ export const services: Service[] = [
     slug: "paint-protection",
     name: "Paint Protection",
     shortName: "Paint Protection",
+    metaDescription:
+      "Mobile paint protection in Colchester and Essex — helps shield clean, prepped bodywork from road contaminants and UV. Fully insured. Request a quote.",
     directAnswer:
       "Paint protection from JS Car Detailing Colchester is applied to clean, prepped bodywork to help shield it from everyday contaminants and UV exposure. It's delivered as a fully mobile service across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford. Contact the business for a quote, as pricing depends on vehicle size and paint condition.",
     summary:
@@ -140,7 +150,7 @@ export const services: Service[] = [
       {
         question: "How much does paint protection cost in Colchester?",
         answer:
-          "Cost depends on vehicle size and current paint condition. {{PLACEHOLDER: price list not supplied by client}} — contact JS Car Detailing Colchester directly for a quote.",
+          "Cost depends on vehicle size and current paint condition — contact JS Car Detailing Colchester directly for a free quote.",
       },
       {
         question: "Does the car need washing before paint protection is applied?",
@@ -154,6 +164,8 @@ export const services: Service[] = [
     slug: "headlight-restoration",
     name: "Headlight Restoration",
     shortName: "Headlight Restoration",
+    metaDescription:
+      "Mobile headlight restoration in Colchester — cloudy, yellowed or oxidised headlight lenses restored for better clarity and looks. Get a quote today.",
     directAnswer:
       "Headlight restoration from JS Car Detailing Colchester treats cloudy, yellowed, or oxidised headlight lenses to improve clarity and appearance. It's carried out as a fully mobile service across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford. Get a quote for your vehicle's headlights.",
     summary:
