@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { TrustBar } from "@/components/sections/TrustBar";
 import { ServicesOverview } from "@/components/sections/ServicesOverview";
-import { PriceList } from "@/components/sections/PriceList";
 import { FeaturedReviews } from "@/components/sections/FeaturedReviews";
 import { ServiceAreaSection } from "@/components/sections/ServiceAreaSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -22,7 +21,6 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <ServicesOverview />
-      <PriceList />
       <FeaturedReviews />
       <ServiceAreaSection />
       <CtaBanner />
