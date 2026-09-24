@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { ImageOff } from "lucide-react";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { SheenPanel } from "@/components/ui/SheenPanel";
 import { BreadcrumbSchema } from "@/components/schema/BreadcrumbSchema";
-import { services } from "@/lib/data/services";
+
+const photos = [
+  { src: "/gallery/snow-foam-wash.png", width: 243, height: 203, alt: "Grey hatchback before and during a snow foam exterior wash", caption: "Snow foam exterior wash" },
+  { src: "/gallery/rear-seat-clean.png", width: 243, height: 203, alt: "Rear seats before and after a deep interior clean", caption: "Rear seat deep clean" },
+  { src: "/gallery/seat-stain-removal.png", width: 243, height: 203, alt: "Front seats before and after stain removal", caption: "Seat stain removal" },
+  { src: "/gallery/smart-exterior-before-after.png", width: 243, height: 203, alt: "White Smart car before and after an exterior detail", caption: "Exterior detail" },
+  { src: "/gallery/smart-exterior-finish.png", width: 243, height: 304, alt: "White Smart car with a finished gloss exterior", caption: "Gloss finish" },
+  { src: "/gallery/red-car-rear-interior.png", width: 243, height: 304, alt: "Red car rear interior before and after cleaning", caption: "Interior valet" },
+];
 
 const breadcrumbItems = [
   { name: "Home", path: "/" },
@@ -27,22 +34,29 @@ export default function GalleryPage() {
       <PageHero
         eyebrow="Gallery"
         title="Before & after"
-        subtitle="Real photography from completed details is being added here — in the meantime, each slot below is clearly marked rather than filled with stock photos."
+        subtitle="Real results from our mobile valeting and detailing work across Colchester and Essex."
       />
 
       <section className="pb-16 sm:pb-24">
         <Container>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <SheenPanel key={service.slug} className="aspect-[4/3] w-full">
-                <div className="relative z-10 flex flex-col items-center gap-2 px-6 text-center">
-                  <ImageOff className="h-6 w-6 text-fg-subtle" aria-hidden />
-                  <p className="text-sm font-semibold text-fg">{service.name}</p>
-                  <p className="text-xs text-fg-subtle">
-                    {"{{PLACEHOLDER: before/after photo}}"}
-                  </p>
-                </div>
-              </SheenPanel>
+          <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+            {photos.map((photo) => (
+              <figure
+                key={photo.src}
+                className="mb-5 break-inside-avoid overflow-hidden rounded-3xl border border-border-strong bg-bg-elevated"
+              >
+                <Image
+                  src={photo.src}
+                  width={photo.width}
+                  height={photo.height}
+                  alt={photo.alt}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="h-auto w-full"
+                />
+                <figcaption className="px-5 py-3 text-sm font-semibold text-fg">
+                  {photo.caption}
+                </figcaption>
+              </figure>
             ))}
           </div>
         </Container>
