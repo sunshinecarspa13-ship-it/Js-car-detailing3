@@ -2,7 +2,8 @@ import { ShieldCheck, CalendarDays } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
-import { SheenPanel } from "@/components/ui/SheenPanel";
+import Image from "next/image";
+import Link from "next/link";
 import { business } from "@/lib/data/business";
 
 export function Hero() {
@@ -48,16 +49,22 @@ export function Hero() {
           </div>
         </div>
 
-        <SheenPanel className="aspect-[4/5] w-full sm:aspect-[16/10] lg:aspect-[4/5]">
-          <div className="relative z-10 flex flex-col items-center gap-3 px-8 text-center">
-            <p className="text-xs font-semibold tracking-[0.2em] text-fg-subtle uppercase">
-              Before &amp; after gallery
-            </p>
-            <p className="max-w-xs text-sm text-fg-muted">
-              {"{{PLACEHOLDER: real before/after photography from the client's own work}}"}
-            </p>
-          </div>
-        </SheenPanel>
+        <Link
+          href="/gallery"
+          className="group relative block aspect-[4/5] w-full overflow-hidden rounded-3xl border border-border-strong sm:aspect-[16/10] lg:aspect-[4/5]"
+        >
+          <Image
+            src="/gallery/snow-foam-wash.jpg"
+            alt="Hatchback before and during a snow foam wash by JS Car Detailing Colchester"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+          <span className="absolute bottom-4 left-4 rounded-full bg-bg/80 px-4 py-2 text-xs font-semibold tracking-[0.2em] text-fg uppercase backdrop-blur">
+            Before &amp; after gallery
+          </span>
+        </Link>
       </Container>
     </section>
   );
