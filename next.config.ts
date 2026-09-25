@@ -14,12 +14,23 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   async redirects() {
-    return DUPLICATE_HOSTS.map((host) => ({
-      source: "/:path*",
-      has: [{ type: "host" as const, value: host }],
-      destination: `${CANONICAL_ORIGIN}/:path*`,
+    // Common sitemap paths other platforms use (e.g. WordPress/Yoast), so a
+    // sitemap submitted in Search Console under those names still resolves.
+    const sitemapAliases = ["/sitemap_index.xml", "/sitemap"].map((source) => ({
+      source,
+      destination: "/sitemap.xml",
       permanent: true,
     }));
+
+    return [
+      ...DUPLICATE_HOSTS.map((host) => ({
+        source: "/:path*",
+        has: [{ type: "host" as const, value: host }],
+        destination: `${CANONICAL_ORIGIN}/:path*`,
+        permanent: true,
+      })),
+      ...sitemapAliases,
+    ];
   },
 
   async headers() {
