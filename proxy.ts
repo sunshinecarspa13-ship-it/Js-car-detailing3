@@ -5,6 +5,12 @@ import { ADMIN_SESSION_COOKIE, verifySessionToken } from "@/lib/auth/admin-sessi
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Paths match case-insensitively in next.config redirects, so the
+  // capitalised sitemap URL (submitted once in Search Console) is fixed here.
+  if (pathname === "/Sitemap.xml") {
+    return NextResponse.redirect(new URL("/sitemap.xml", request.url), 308);
+  }
+
   if (pathname === "/admin/login") {
     return NextResponse.next();
   }
@@ -21,5 +27,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/Sitemap.xml"],
 };
