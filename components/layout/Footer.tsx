@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Clock, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -12,8 +13,17 @@ export function Footer() {
     <footer className="border-t border-border bg-bg pb-24 pt-16 lg:pb-16">
       <Container className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="text-base font-semibold text-fg">
-            JS Car Detailing <span className="text-accent">Colchester</span>
+          <p className="flex items-center gap-3 text-base font-semibold text-fg">
+            <Image
+              src="/logo-round.png"
+              alt=""
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full"
+            />
+            <span>
+              JS Car Detailing <span className="text-accent">Colchester</span>
+            </span>
           </p>
           <p className="mt-3 text-sm leading-relaxed text-fg-muted">
             {business.serviceArea.description}

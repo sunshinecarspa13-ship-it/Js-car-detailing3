@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -16,11 +17,21 @@ export function Header() {
       <Container className="flex h-16 items-center justify-between sm:h-20">
         <Link
           href="/"
-          className="text-base font-semibold tracking-tight text-fg sm:text-lg"
+          className="flex items-center gap-3 text-base font-semibold tracking-tight text-fg sm:text-lg"
           onClick={() => setOpen(false)}
         >
-          JS Car Detailing
-          <span className="text-accent"> Colchester</span>
+          <Image
+            src="/logo-round.png"
+            alt=""
+            width={48}
+            height={48}
+            priority
+            className="h-10 w-10 rounded-full sm:h-12 sm:w-12"
+          />
+          <span>
+            JS Car Detailing
+            <span className="text-accent"> Colchester</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
