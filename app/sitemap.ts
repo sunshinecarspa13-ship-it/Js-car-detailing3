@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/data/site";
 import { services } from "@/lib/data/services";
 import { areas } from "@/lib/data/areas";
+import { sublocations } from "@/lib/data/sublocations";
+import { subservices } from "@/lib/data/subservices";
+import { guides } from "@/lib/data/guides";
 import { galleryPhotos, featuredPhotos, getPhotosForService } from "@/lib/data/gallery";
 
 // One timestamp per build: every route is regenerated on deploy, so the
@@ -19,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.6, changeFrequency: "monthly" },
     { path: "/contact", priority: 0.7, changeFrequency: "monthly" },
     { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
+    { path: "/guides", priority: 0.6, changeFrequency: "monthly" },
   ].map(({ path, priority, changeFrequency }) => ({
     url: `${SITE_URL}${path}`,
     lastModified,
@@ -45,5 +49,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...areaRoutes];
+  const sublocationRoutes = sublocations.map((place) => ({
+    url: `${SITE_URL}/areas/${place.parent}/${place.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  const subserviceRoutes = subservices.map((sub) => ({
+    url: `${SITE_URL}/services/${sub.parent}/${sub.slug}`,
+    lastModified,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+    images: sub.photos.map((src) => `${SITE_URL}${src}`),
+  }));
+
+  const guideRoutes = guides.map((guide) => ({
+    url: `${SITE_URL}/guides/${guide.slug}`,
+    lastModified: new Date(guide.published),
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...serviceRoutes,
+    ...subserviceRoutes,
+    ...areaRoutes,
+    ...sublocationRoutes,
+    ...guideRoutes,
+  ];
 }

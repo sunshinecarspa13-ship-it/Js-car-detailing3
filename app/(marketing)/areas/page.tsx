@@ -9,6 +9,7 @@ import { MapEmbed } from "@/components/ui/MapEmbed";
 import { BreadcrumbSchema } from "@/components/schema/BreadcrumbSchema";
 import { areas } from "@/lib/data/areas";
 import { business } from "@/lib/data/business";
+import { getSublocationsFor } from "@/lib/data/sublocations";
 
 const breadcrumbItems = [
   { name: "Home", path: "/" },
@@ -61,6 +62,22 @@ export default function AreasPage() {
                 />
               </Link>
             ))}
+
+            <div className="rounded-2xl border border-border p-6">
+              <h2 className="text-sm font-semibold text-fg">Colchester neighbourhoods</h2>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {getSublocationsFor("colchester").map((place) => (
+                  <li key={place.slug}>
+                    <Link
+                      href={`/areas/colchester/${place.slug}`}
+                      className="inline-flex rounded-full border border-border-strong px-3.5 py-1.5 text-sm text-fg-muted transition-colors hover:border-accent hover:text-accent"
+                    >
+                      {place.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <MapEmbed

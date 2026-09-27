@@ -6,6 +6,7 @@ import { MapEmbed } from "@/components/ui/MapEmbed";
 import { Reveal } from "@/components/ui/Reveal";
 import { areas } from "@/lib/data/areas";
 import { business } from "@/lib/data/business";
+import { getSublocationsFor } from "@/lib/data/sublocations";
 
 export function ServiceAreaSection() {
   return (
@@ -40,6 +41,19 @@ export function ServiceAreaSection() {
               </li>
             ))}
           </ul>
+
+          <p className="mt-6 text-sm text-fg-muted">
+            Across Colchester, including{" "}
+            {getSublocationsFor("colchester").map((place, index, all) => (
+              <span key={place.slug}>
+                {index > 0 && (index === all.length - 1 ? " and " : ", ")}
+                <Link href={`/areas/colchester/${place.slug}`} className="text-accent hover:underline">
+                  {place.name}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
         </Reveal>
 
         <MapEmbed

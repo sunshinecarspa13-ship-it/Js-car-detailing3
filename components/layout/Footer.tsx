@@ -12,6 +12,7 @@ const companyLinks = [
   { href: "/reviews", label: "Customer Reviews" },
   { href: "/about", label: "About Us" },
   { href: "/faq", label: "FAQ" },
+  { href: "/guides", label: "Car Care Guides" },
   { href: "/contact", label: "Contact & Quotes" },
 ];
 

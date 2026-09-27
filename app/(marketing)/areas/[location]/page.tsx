@@ -15,6 +15,10 @@ import { featuredPhotos, withServiceNames } from "@/lib/data/gallery";
 import { SITE_URL } from "@/lib/data/site";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { JsonLd } from "@/components/schema/JsonLd";
+import { FaqSection } from "@/components/content/FaqSection";
+import { RelatedLinks } from "@/components/content/RelatedLinks";
+import { getSublocationsFor } from "@/lib/data/sublocations";
+import { guidesLinkingTo } from "@/lib/data/links";
 
 export function generateStaticParams() {
   return areas.map((area) => ({ location: area.slug }));
@@ -46,6 +50,8 @@ export default async function AreaPage(props: PageProps<"/areas/[location]">) {
   ];
 
   const otherAreas = areas.filter((a) => a.slug !== area.slug);
+  const neighbourhoods = getSublocationsFor(area.slug);
+  const relatedGuides = guidesLinkingTo(`/areas/${area.slug}`);
 
   // Area-specific service entity tied to the main business node; the City's
   // sameAs pins the place to an unambiguous Wikipedia/Wikidata entity.
@@ -136,25 +142,68 @@ export default async function AreaPage(props: PageProps<"/areas/[location]">) {
               </a>
             </p>
 
-            <h3 className="mt-10 text-lg font-semibold text-fg">
-              Services available in {area.name}
-            </h3>
-            <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <h2 className="mt-14 text-2xl font-semibold tracking-tight text-fg">
+              Services in {area.name}
+            </h2>
+            <div className="mt-6 space-y-4">
               {services.map((service) => (
-                <li key={service.slug}>
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="group flex items-center justify-between rounded-xl border border-border bg-bg-elevated px-4 py-3.5 text-sm text-fg-muted transition-colors hover:border-accent/60 hover:text-fg"
-                  >
+                <section
+                  key={service.slug}
+                  className="rounded-2xl border border-border bg-bg-elevated p-5 sm:p-6"
+                >
+                  <h3 className="text-base font-semibold text-fg">
                     {service.name} in {area.name}
-                    <ArrowRight
-                      className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1 group-hover:text-accent"
-                      aria-hidden
-                    />
-                  </Link>
-                </li>
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+                    {area.serviceNotes[service.slug]}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                    <Link
+                      href={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-1.5 text-accent hover:underline"
+                    >
+                      What&apos;s included
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                    </Link>
+                    <Link
+                      href={`/book?service=${service.slug}&area=${area.slug}`}
+                      className="text-fg-muted transition-colors hover:text-accent"
+                    >
+                      Book in {area.name}
+                    </Link>
+                  </div>
+                </section>
               ))}
-            </ul>
+            </div>
+
+            {neighbourhoods.length > 0 && (
+              <>
+                <h2 className="mt-14 text-2xl font-semibold tracking-tight text-fg">
+                  {area.name} neighbourhoods we cover
+                </h2>
+                <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {neighbourhoods.map((place) => (
+                    <li key={place.slug}>
+                      <Link
+                        href={`/areas/${area.slug}/${place.slug}`}
+                        className="group flex items-center justify-between rounded-xl border border-border bg-bg-elevated px-4 py-3.5 transition-colors hover:border-accent/60"
+                      >
+                        <span>
+                          <span className="block text-sm font-semibold text-fg">{place.name}</span>
+                          <span className="block text-xs text-fg-subtle">
+                            {place.postcodeDistricts.join(", ")} · {place.milesFromBase} mi from base
+                          </span>
+                        </span>
+                        <ArrowRight
+                          className="h-4 w-4 shrink-0 text-fg-subtle transition-transform group-hover:translate-x-1 group-hover:text-accent"
+                          aria-hidden
+                        />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
 
             <div className="mt-10">
               <MapEmbed
@@ -162,6 +211,10 @@ export default async function AreaPage(props: PageProps<"/areas/[location]">) {
                 title={`Map of ${area.name}`}
                 className="aspect-[16/9] w-full"
               />
+            </div>
+
+            <div className="mt-14">
+              <FaqSection title={`Car detailing in ${area.name}: FAQs`} faqs={area.faqs} />
             </div>
 
             <div className="mt-14 flex items-baseline justify-between gap-4">
@@ -177,6 +230,12 @@ export default async function AreaPage(props: PageProps<"/areas/[location]">) {
             <div className="mt-6">
               <GalleryGrid items={withServiceNames(featuredPhotos.slice(0, 3))} layout="strip" />
             </div>
+
+            {relatedGuides.length > 0 && (
+              <div className="mt-14">
+                <RelatedLinks title={`Guides for ${area.name} drivers`} links={relatedGuides} />
+              </div>
+            )}
           </div>
 
           <aside className="space-y-8">

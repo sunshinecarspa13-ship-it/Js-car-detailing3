@@ -2,6 +2,9 @@ import { business } from "@/lib/data/business";
 import { services } from "@/lib/data/services";
 import { areas } from "@/lib/data/areas";
 import { SITE_URL } from "@/lib/data/site";
+import { sublocations } from "@/lib/data/sublocations";
+import { subservices } from "@/lib/data/subservices";
+import { guides } from "@/lib/data/guides";
 
 // Follows the llms.txt spec (llmstxt.org): an H1, a short blockquote
 // summary, then H2 sections of markdown links with one-line descriptions.
@@ -37,6 +40,23 @@ export async function GET() {
     ...areas.map(
       (a) => `- [${a.name}, ${a.county}](${SITE_URL}/areas/${a.slug}): ${a.directAnswer}`
     ),
+    "",
+    "## Service techniques",
+    "",
+    ...subservices.map(
+      (s) => `- [${s.name}](${SITE_URL}/services/${s.parent}/${s.slug}): ${s.directAnswer}`
+    ),
+    "",
+    "## Colchester neighbourhoods",
+    "",
+    ...sublocations.map(
+      (p) =>
+        `- [${p.name}, Colchester (${p.postcodeDistricts.join(", ")})](${SITE_URL}/areas/${p.parent}/${p.slug}): ${p.directAnswer}`
+    ),
+    "",
+    "## Guides",
+    "",
+    ...guides.map((g) => `- [${g.title}](${SITE_URL}/guides/${g.slug}): ${g.directAnswer}`),
     "",
     "## More",
     "",

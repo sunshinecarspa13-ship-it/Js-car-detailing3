@@ -14,6 +14,9 @@ import { areas } from "@/lib/data/areas";
 import { business } from "@/lib/data/business";
 import { getPhotosForService, withServiceNames } from "@/lib/data/gallery";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
+import { RelatedLinks } from "@/components/content/RelatedLinks";
+import { getSubservicesFor } from "@/lib/data/subservices";
+import { guidesLinkingTo } from "@/lib/data/links";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -46,6 +49,8 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
 
   const otherServices = services.filter((s) => s.slug !== service.slug);
   const photos = withServiceNames(getPhotosForService(service.slug));
+  const subservices = getSubservicesFor(service.slug);
+  const relatedGuides = guidesLinkingTo(`/services/${service.slug}`);
 
   return (
     <>
@@ -107,6 +112,19 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
             <h3 className="mt-10 text-lg font-semibold text-fg">Ideal for</h3>
             <p className="mt-3 leading-relaxed text-fg-muted">{service.idealFor}</p>
 
+            {subservices.length > 0 && (
+              <div className="mt-14">
+                <RelatedLinks
+                  title={`${service.name} in detail`}
+                  links={subservices.map((sub) => ({
+                    href: `/services/${service.slug}/${sub.slug}`,
+                    label: sub.name,
+                    description: sub.metaDescription,
+                  }))}
+                />
+              </div>
+            )}
+
             {photos.length > 0 && (
               <>
                 <div className="mt-14 flex items-baseline justify-between gap-4">
@@ -144,6 +162,12 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
               </Link>
               .
             </p>
+
+            {relatedGuides.length > 0 && (
+              <div className="mt-14">
+                <RelatedLinks title="Helpful guides" links={relatedGuides} />
+              </div>
+            )}
 
             {service.references && (
               <>
