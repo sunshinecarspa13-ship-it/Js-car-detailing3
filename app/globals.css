@@ -56,6 +56,11 @@
     color: var(--color-accent-foreground);
   }
 
+  /* Lock page scroll behind the gallery lightbox (a modal <dialog>). */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;

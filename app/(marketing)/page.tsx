@@ -6,6 +6,8 @@ import { ServicesOverview } from "@/components/sections/ServicesOverview";
 import { FeaturedReviews } from "@/components/sections/FeaturedReviews";
 import { ServiceAreaSection } from "@/components/sections/ServiceAreaSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { GalleryPreview } from "@/components/sections/GalleryPreview";
+import { HomeFaq } from "@/components/sections/HomeFaq";
 import { LocalBusinessSchema } from "@/components/schema/LocalBusinessSchema";
 import { siteConfig } from "@/lib/data/site";
 
@@ -23,8 +25,10 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <ServicesOverview />
+      <GalleryPreview />
       <FeaturedReviews />
       <ServiceAreaSection />
+      <HomeFaq />
       <CtaBanner />
     </>
   );

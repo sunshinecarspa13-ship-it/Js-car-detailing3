@@ -40,6 +40,8 @@ export async function GET() {
     "",
     "## More",
     "",
+    `- [Book online](${SITE_URL}/book): request an appointment by service, area, date and time`,
+    `- [Gallery](${SITE_URL}/gallery): real before-and-after photos of customer jobs`,
     `- [Reviews](${SITE_URL}/reviews): all Google reviews, quoted verbatim`,
     `- [FAQ](${SITE_URL}/faq): common questions about pricing, coverage, and booking`,
     `- [About](${SITE_URL}/about): insurance, trust signals, and how the business operates`,

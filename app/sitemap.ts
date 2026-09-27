@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/data/site";
 import { services } from "@/lib/data/services";
 import { areas } from "@/lib/data/areas";
-import { galleryPhotos } from "@/lib/data/gallery";
+import { galleryPhotos, featuredPhotos, getPhotosForService } from "@/lib/data/gallery";
 
 // One timestamp per build: every route is regenerated on deploy, so the
 // deploy time is an honest lastmod for all of them.
@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(path === "/gallery" && {
       images: galleryPhotos.map((photo) => `${SITE_URL}${photo.src}`),
     }),
-    ...(path === "" && { images: [`${SITE_URL}${galleryPhotos[0].src}`] }),
+    ...(path === "" && { images: featuredPhotos.map((photo) => `${SITE_URL}${photo.src}`) }),
   }));
 
   const serviceRoutes = services.map((service) => ({
@@ -35,6 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.8,
+    images: getPhotosForService(service.slug).map((photo) => `${SITE_URL}${photo.src}`),
   }));
 
   const areaRoutes = areas.map((area) => ({

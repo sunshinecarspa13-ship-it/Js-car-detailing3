@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2 } from "lucide-react";
@@ -24,6 +24,7 @@ export function BookingForm() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
@@ -39,6 +40,16 @@ export function BookingForm() {
       notes: "",
     },
   });
+
+  // Service and area pages deep-link here as /book?service=…&area=…. Read on
+  // the client (not via searchParams) so /book stays statically rendered.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get("service");
+    const area = params.get("area");
+    if (service && services.some((s) => s.slug === service)) setValue("service", service);
+    if (area && areas.some((a) => a.slug === area)) setValue("area", area);
+  }, [setValue]);
 
   async function onSubmit(values: BookingFormValues) {
     setStatus("submitting");

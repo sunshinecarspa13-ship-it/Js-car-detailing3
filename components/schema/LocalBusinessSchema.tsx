@@ -4,6 +4,7 @@ import { services } from "@/lib/data/services";
 import { reviewsWithText } from "@/lib/data/reviews";
 import { SITE_URL, siteConfig } from "@/lib/data/site";
 import { galleryPhotos } from "@/lib/data/gallery";
+import { areas } from "@/lib/data/areas";
 
 // NOTE: openingHoursSpecification is deliberately omitted. Closing time is
 // not confirmed by the client (business.hours.closesPlaceholder) — publishing
@@ -22,7 +23,12 @@ export function LocalBusinessSchema() {
     logo: `${SITE_URL}/android-chrome-512x512.png`,
     image: galleryPhotos.map((photo) => `${SITE_URL}${photo.src}`),
     telephone: business.phone.href,
-    hasMap: business.googleProfileUrl,
+    hasMap: business.googleMapsUrl,
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: business.geo.latitude,
+      longitude: business.geo.longitude,
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: `${business.address.line1}, ${business.address.line2}`,
@@ -30,9 +36,11 @@ export function LocalBusinessSchema() {
       postalCode: business.address.postalCode,
       addressCountry: business.address.countryCode,
     },
-    areaServed: business.serviceArea.towns.map((town) => ({
+    areaServed: areas.map((area) => ({
       "@type": "City",
-      name: town,
+      name: area.name,
+      url: `${SITE_URL}/areas/${area.slug}`,
+      sameAs: [area.wikipedia, area.wikidata],
     })),
     aggregateRating: {
       "@type": "AggregateRating",

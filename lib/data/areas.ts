@@ -10,11 +10,16 @@ export type Area = {
   metaDescription: string;
   localContext: string;
   servicesNote: string;
+  /** Authoritative external references for the place (visible link + schema sameAs). */
+  wikipedia: string;
+  wikidata: string;
 };
 
 export const areas: Area[] = [
   {
     slug: "colchester",
+    wikipedia: "https://en.wikipedia.org/wiki/Colchester",
+    wikidata: "https://www.wikidata.org/wiki/Q184163",
     name: "Colchester",
     county: "Essex",
     isBase: true,
@@ -22,14 +27,16 @@ export const areas: Area[] = [
     metaDescription:
       "Mobile car detailing in Colchester — washes, deep cleans, interior cleans and paint protection at your home or workplace. Open 7 days a week from 8am.",
     directAnswer:
-      "JS Car Detailing Colchester is based in Colchester, operating from King Edward Quay, and covers the whole town as its home service area. As a fully mobile detailer, appointments are carried out at your home or workplace anywhere in Colchester, seven days a week from 8am.",
+      "JS Car Detailing Colchester is based in Colchester, operating from King Edward Quay, and covers the whole city as its home service area. As a fully mobile detailer, appointments are carried out at your home or workplace anywhere in Colchester, seven days a week from 8am.",
     localContext:
-      "Colchester is Britain's oldest recorded town and Essex's largest, spanning everything from the historic town centre around Colchester Castle to the surrounding residential areas and the University of Essex campus. As the home base, Colchester sees the shortest response times and the most flexible availability of any area covered.",
+      "Colchester — granted city status in 2022 and built on the site of Roman Camulodunum, Britain's first capital — spans everything from the historic centre around Colchester Castle to the surrounding residential areas and the University of Essex campus. As the home base, Colchester sees the shortest response times and the most flexible availability of any area covered.",
     servicesNote:
       "All five services — exterior wash, deep clean, interior clean, paint protection, and headlight restoration — are available throughout Colchester with no call-out distance to travel.",
   },
   {
     slug: "ipswich",
+    wikipedia: "https://en.wikipedia.org/wiki/Ipswich",
+    wikidata: "https://www.wikidata.org/wiki/Q184775",
     name: "Ipswich",
     county: "Suffolk",
     isBase: false,
@@ -45,6 +52,8 @@ export const areas: Area[] = [
   },
   {
     slug: "clacton-on-sea",
+    wikipedia: "https://en.wikipedia.org/wiki/Clacton-on-Sea",
+    wikidata: "https://www.wikidata.org/wiki/Q985833",
     name: "Clacton-on-Sea",
     county: "Essex",
     isBase: false,
@@ -60,6 +69,8 @@ export const areas: Area[] = [
   },
   {
     slug: "chelmsford",
+    wikipedia: "https://en.wikipedia.org/wiki/Chelmsford",
+    wikidata: "https://www.wikidata.org/wiki/Q210985",
     name: "Chelmsford",
     county: "Essex",
     isBase: false,
@@ -69,7 +80,7 @@ export const areas: Area[] = [
     directAnswer:
       "Yes — JS Car Detailing Colchester covers Chelmsford as part of its mobile service area, roughly 30–40 minutes from its Colchester base via the A12. Exterior washes, deep cleans, interior cleans, paint protection, and headlight restoration are all available at your home or workplace in Chelmsford.",
     localContext:
-      "Chelmsford is Essex's county town and only city, with a mix of dense city-centre living and surrounding suburbs and villages. As the furthest of the four regular service towns from the Colchester base, Chelmsford bookings are typically arranged a little further ahead to fit the route.",
+      "Chelmsford is Essex's county town and has been a city since 2012, with a mix of dense city-centre living and surrounding suburbs and villages. As the furthest of the four regular service towns from the Colchester base, Chelmsford bookings are typically arranged a little further ahead to fit the route.",
     servicesNote:
       "All five services are available in Chelmsford — get in touch to check availability for your part of the city or surrounding area.",
   },

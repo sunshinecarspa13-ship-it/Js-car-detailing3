@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
@@ -44,7 +45,15 @@ export default function FaqPage() {
 
           {services.map((service) => (
             <div key={service.slug}>
-              <h2 className="mb-5 text-xl font-semibold text-fg">{service.name}</h2>
+              <div className="mb-5 flex items-baseline justify-between gap-4">
+                <h2 className="text-xl font-semibold text-fg">{service.name}</h2>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="shrink-0 text-sm font-medium text-accent hover:underline"
+                >
+                  {service.name} details →
+                </Link>
+              </div>
               <FaqAccordion faqs={service.faqs} />
             </div>
           ))}

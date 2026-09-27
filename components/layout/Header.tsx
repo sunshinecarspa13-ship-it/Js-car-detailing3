@@ -25,7 +25,7 @@ export function Header() {
             alt=""
             width={48}
             height={48}
-            priority
+            loading="eager"
             className="h-10 w-10 rounded-full sm:h-12 sm:w-12"
           />
           <span>

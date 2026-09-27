@@ -20,6 +20,8 @@ export type Service = {
   idealFor: string;
   faqs: Faq[];
   icon: "droplets" | "sparkles" | "armchair" | "shield" | "lightbulb";
+  /** Authoritative external sources backing a claim on the page. */
+  references?: { label: string; href: string; context: string }[];
 };
 
 export const services: Service[] = [
@@ -191,6 +193,20 @@ export const services: Service[] = [
       },
     ],
     icon: "lightbulb",
+    references: [
+      {
+        label: "DVSA MOT inspection manual — lamps and headlamps",
+        href: "https://www.gov.uk/guidance/mot-inspection-manual-for-private-passenger-and-light-commercial-vehicles/4-lamps-reflectors-and-electrical-equipment",
+        context:
+          "Headlamp condition and light output are checked at the MOT. The official inspection standard is published by the DVSA on GOV.UK.",
+      },
+      {
+        label: "Check your vehicle's MOT history",
+        href: "https://www.gov.uk/check-mot-history",
+        context:
+          "See whether headlamps have come up as an advisory or failure on previous MOT tests.",
+      },
+    ],
   },
 ];
 

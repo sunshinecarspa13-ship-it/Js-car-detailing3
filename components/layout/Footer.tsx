@@ -6,12 +6,21 @@ import { business } from "@/lib/data/business";
 import { services } from "@/lib/data/services";
 import { areas } from "@/lib/data/areas";
 
+const companyLinks = [
+  { href: "/book", label: "Book Online" },
+  { href: "/gallery", label: "Before & After Gallery" },
+  { href: "/reviews", label: "Customer Reviews" },
+  { href: "/about", label: "About Us" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact & Quotes" },
+];
+
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-border bg-bg pb-24 pt-16 lg:pb-16">
-      <Container className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <Container className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
         <div>
           <p className="flex items-center gap-3 text-base font-semibold text-fg">
             <Image
@@ -67,6 +76,22 @@ export function Footer() {
         </div>
 
         <div>
+          <p className="text-sm font-semibold text-fg">Company</p>
+          <ul className="mt-4 space-y-2.5">
+            {companyLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm text-fg-muted transition-colors hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
           <p className="text-sm font-semibold text-fg">Contact</p>
           <address className="mt-4 space-y-3 text-sm not-italic text-fg-muted">
             <a
@@ -76,10 +101,15 @@ export function Footer() {
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
               {business.phone.display}
             </a>
-            <p className="flex items-start gap-2.5">
+            <a
+              href={business.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2.5 transition-colors hover:text-accent"
+            >
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
               {business.address.full}
-            </p>
+            </a>
             <p className="flex items-start gap-2.5">
               <Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
               {business.hours.display}
@@ -92,9 +122,14 @@ export function Footer() {
         <p>
           © {year} {business.name}. All rights reserved.
         </p>
-        <a href={business.googleProfileUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
-          View on Google
-        </a>
+        <div className="flex gap-5">
+          <a href={business.googleProfileUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+            Google reviews
+          </a>
+          <a href={business.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+            Find us on Google Maps
+          </a>
+        </div>
       </Container>
     </footer>
   );

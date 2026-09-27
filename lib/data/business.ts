@@ -13,6 +13,10 @@ export const business = {
   },
 
   googlePlusCode: "VWHJ+C6 Colchester, United Kingdom",
+  // Decoded from the Plus Code above (full code 9F32VWHJ+C6) — the centre of
+  // its ~14m cell at King Edward Quay. Derived, not estimated.
+  geo: { latitude: 51.87856, longitude: 0.93056 },
+  googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=9F32VWHJ%2BC6",
   googleProfileUrl: "https://share.google/UGx470jGqVjONJ3x3",
 
   address: {
