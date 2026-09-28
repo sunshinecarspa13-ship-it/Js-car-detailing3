@@ -3,8 +3,8 @@ import { Droplets, Sparkles, Armchair, Shield, Lightbulb, ArrowRight } from "luc
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { services, getServiceBySlug } from "@/lib/data/services";
-import { subservices } from "@/lib/data/subservices";
+import { services } from "@/lib/data/services";
+import { subservices, getSubservicesFor } from "@/lib/data/subservices";
 
 const icons = {
   droplets: Droplets,
@@ -22,7 +22,7 @@ export function ServicesOverview() {
           <SectionHeading
             eyebrow="Services"
             title="Every detail, delivered at your door"
-            subtitle="Five services covering everything from a quick refresh to full paint protection — all fully mobile across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford."
+            subtitle={`${services.length} core services and ${subservices.length} specialist treatments, from a quick refresh to ceramic coating and paint protection film — all fully mobile across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford.`}
           />
         </Reveal>
 
@@ -53,31 +53,42 @@ export function ServicesOverview() {
         </div>
 
         <Reveal>
-          <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-border px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-fg-muted">
-              <span className="font-semibold text-fg">Specialist treatments: </span>
-              {subservices.map((sub, index) => (
-                <span key={sub.slug}>
-                  {index > 0 && " · "}
-                  <Link
-                    href={`/services/${sub.parent}/${sub.slug}`}
-                    className="text-accent hover:underline"
-                  >
-                    {sub.name}
-                  </Link>{" "}
-                  <span className="text-fg-subtle">
-                    (part of our {getServiceBySlug(sub.parent)?.name.toLowerCase()})
-                  </span>
-                </span>
-              ))}
-            </p>
-            <Link
-              href="/services"
-              className="group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent"
-            >
-              All car detailing services
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-            </Link>
+          <div className="mt-8 rounded-2xl border border-border p-6 sm:p-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <h3 className="text-lg font-semibold text-fg">
+                Specialist treatments, from ceramic coating to pet hair removal
+              </h3>
+              <Link
+                href="/services"
+                className="group flex shrink-0 items-center gap-1.5 text-sm font-semibold text-accent"
+              >
+                All car detailing services
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+              </Link>
+            </div>
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {services
+                .filter((service) => getSubservicesFor(service.slug).length > 0)
+                .map((service) => (
+                  <div key={service.slug}>
+                    <p className="text-xs font-semibold tracking-[0.15em] text-fg-subtle uppercase">
+                      {service.name}
+                    </p>
+                    <ul className="mt-3 space-y-2">
+                      {getSubservicesFor(service.slug).map((sub) => (
+                        <li key={sub.slug}>
+                          <Link
+                            href={`/services/${service.slug}/${sub.slug}`}
+                            className="text-sm text-fg-muted transition-colors hover:text-accent"
+                          >
+                            {sub.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+            </div>
           </div>
         </Reveal>
       </Container>

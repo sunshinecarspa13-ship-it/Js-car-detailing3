@@ -5,6 +5,8 @@ import { Container } from "@/components/ui/Container";
 import { business } from "@/lib/data/business";
 import { serviceLinks, areaLinks, neighbourhoodLinks } from "./nav-links";
 
+const treatmentLinks = serviceLinks.flatMap((link) => link.children ?? []);
+
 const companyLinks = [
   { href: "/book", label: "Book Online" },
   { href: "/gallery", label: "Before & After Gallery" },
@@ -54,17 +56,6 @@ export function Footer() {
                 <Link href={link.href} className={footerLink}>
                   {link.label}
                 </Link>
-                {link.children && link.children.length > 0 && (
-                  <ul className="mt-2 ml-1 space-y-2 border-l border-border pl-3">
-                    {link.children.map((child) => (
-                      <li key={child.href}>
-                        <Link href={child.href} className={footerLink}>
-                          {child.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </li>
             ))}
             <li>
@@ -133,7 +124,22 @@ export function Footer() {
         </div>
       </Container>
 
-      <Container className="mt-12 border-t border-border pt-8">
+      <Container className="mt-12 space-y-8 border-t border-border pt-8">
+        <nav aria-labelledby="footer-treatments">
+          <p id="footer-treatments" className="text-sm font-semibold text-fg">
+            Specialist detailing treatments
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+            {treatmentLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className={footerLink}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <nav aria-labelledby="footer-neighbourhoods">
           <p id="footer-neighbourhoods" className="text-sm font-semibold text-fg">
             Mobile car detailing across{" "}

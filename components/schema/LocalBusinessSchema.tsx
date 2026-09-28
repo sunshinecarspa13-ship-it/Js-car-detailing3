@@ -1,6 +1,7 @@
 import { JsonLd } from "./JsonLd";
 import { business } from "@/lib/data/business";
 import { services } from "@/lib/data/services";
+import { subservices } from "@/lib/data/subservices";
 import { reviewsWithText } from "@/lib/data/reviews";
 import { SITE_URL, siteConfig } from "@/lib/data/site";
 import { galleryPhotos } from "@/lib/data/gallery";
@@ -62,13 +63,12 @@ export function LocalBusinessSchema() {
         bestRating: 5,
       },
     })),
-    makesOffer: services.map((service) => ({
+    makesOffer: [
+      ...services.map((service) => ({ name: service.name, path: `/services/${service.slug}` })),
+      ...subservices.map((sub) => ({ name: sub.name, path: `/services/${sub.parent}/${sub.slug}` })),
+    ].map(({ name, path }) => ({
       "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        name: service.name,
-        url: `${SITE_URL}/services/${service.slug}`,
-      },
+      itemOffered: { "@type": "Service", name, url: `${SITE_URL}${path}` },
     })),
     sameAs: [business.googleProfileUrl],
   };

@@ -75,8 +75,13 @@ export function Header() {
   );
 }
 
+const groupSize = (group: NavGroup) =>
+  group.links.reduce((total, link) => total + 1 + (link.children?.length ?? 0), 0);
+
 function DropdownPanel({ groups }: { groups: NavGroup[] }) {
-  const wide = groups.some((group) => group.links.length > 6);
+  // Long groups get twice the width and flow into two columns.
+  const columns = groups.map((group) => (groupSize(group) > 6 ? "2fr" : "1fr")).join(" ");
+  const wide = groups.some((group) => groupSize(group) > 12);
   return (
     <div
       className={cn(
@@ -87,8 +92,9 @@ function DropdownPanel({ groups }: { groups: NavGroup[] }) {
       <div
         className={cn(
           "grid gap-8 rounded-2xl border border-border-strong bg-bg-elevated p-6 shadow-2xl shadow-black/50",
-          wide ? "w-[38rem] grid-cols-[1fr_2fr]" : "w-[34rem] grid-cols-[3fr_2fr]",
+          wide ? "w-[44rem]" : "w-[38rem]",
         )}
+        style={{ gridTemplateColumns: columns }}
       >
         {groups.map((group) => (
           <div key={group.heading}>
@@ -101,14 +107,9 @@ function DropdownPanel({ groups }: { groups: NavGroup[] }) {
                 group.heading
               )}
             </p>
-            <ul
-              className={cn(
-                "mt-3 gap-x-6",
-                group.links.length > 6 ? "grid grid-cols-2" : "flex flex-col",
-              )}
-            >
+            <ul className={cn("mt-3 gap-x-6", groupSize(group) > 6 ? "columns-2" : "flex flex-col")}>
               {group.links.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} className="break-inside-avoid">
                   <Link
                     href={link.href}
                     className="block rounded-md py-1.5 text-sm font-medium text-fg transition-colors hover:text-accent"

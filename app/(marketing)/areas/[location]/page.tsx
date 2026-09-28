@@ -18,6 +18,7 @@ import { JsonLd } from "@/components/schema/JsonLd";
 import { FaqSection } from "@/components/content/FaqSection";
 import { RelatedLinks } from "@/components/content/RelatedLinks";
 import { getSublocationsFor } from "@/lib/data/sublocations";
+import { getSubservicesFor } from "@/lib/data/subservices";
 import { guidesLinkingTo } from "@/lib/data/links";
 
 export function generateStaticParams() {
@@ -157,6 +158,22 @@ export default async function AreaPage(props: PageProps<"/areas/[location]">) {
                   <p className="mt-2 text-sm leading-relaxed text-fg-muted">
                     {area.serviceNotes[service.slug]}
                   </p>
+                  {getSubservicesFor(service.slug).length > 0 && (
+                    <p className="mt-3 text-sm text-fg-muted">
+                      <span className="text-fg-subtle">Specialist treatments in {area.name}: </span>
+                      {getSubservicesFor(service.slug).map((sub, index) => (
+                        <span key={sub.slug}>
+                          {index > 0 && " · "}
+                          <Link
+                            href={`/services/${service.slug}/${sub.slug}`}
+                            className="text-fg transition-colors hover:text-accent"
+                          >
+                            {sub.name}
+                          </Link>
+                        </span>
+                      ))}
+                    </p>
+                  )}
                   <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
                     <Link
                       href={`/services/${service.slug}`}

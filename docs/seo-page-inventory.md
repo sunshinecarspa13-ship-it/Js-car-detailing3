@@ -6,7 +6,7 @@ Run `npm run build && npm run seo:uniqueness` to re-check text overlap. The
 target is ≤ 40% shared with the closest sibling, and the current worst case is
 35%.
 
-## Published (35 URLs)
+## Published (47 URLs)
 
 | URL | Type | Primary entity | Secondary entity | Intent | Priority | Schema |
 |---|---|---|---|---|---|---|
@@ -27,6 +27,18 @@ target is ≤ 40% shared with the closest sibling, and the current worst case is
 | `/services/headlight-restoration` | Service pillar | Headlight restoration | Colchester, MOT | Commercial | 0.8 | Service, FAQPage, Breadcrumb |
 | `/services/exterior-wash/snow-foam-wash` | Sub-service | Snow foam wash | Swirl marks | Informational → commercial | 0.7 | Service, FAQPage, Breadcrumb |
 | `/services/interior-clean/seat-stain-removal` | Sub-service | Seat stain removal | Interior clean | Commercial | 0.7 | Service, FAQPage, Breadcrumb |
+| `/services/exterior-wash/alloy-wheel-detailing` | Sub-service | Alloy wheel detailing | Exterior wash | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/exterior-wash/maintenance-valet-plans` | Sub-service | Maintenance valet plans | Exterior wash | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/deep-clean/clay-bar-decontamination` | Sub-service | Clay bar decontamination | Deep clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/deep-clean/engine-bay-cleaning` | Sub-service | Engine bay cleaning | Deep clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/deep-clean/van-commercial-valeting` | Sub-service | Van & commercial valeting | Deep clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/interior-clean/pet-hair-removal` | Sub-service | Pet hair removal | Interior clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/interior-clean/leather-cleaning-and-conditioning` | Sub-service | Leather cleaning & conditioning | Interior clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/interior-clean/odour-removal` | Sub-service | Car odour removal | Interior clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/interior-clean/carpet-and-upholstery-shampoo` | Sub-service | Carpet & upholstery shampoo | Interior clean | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/paint-protection/ceramic-coating` | Sub-service | Ceramic coating | Paint protection | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/paint-protection/paint-protection-film` | Sub-service | Paint protection film | Paint protection | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
+| `/services/paint-protection/machine-polishing` | Sub-service | Machine polishing / paint correction | Paint protection | Commercial | 0.7 | Service, WebPage (mentions), FAQPage, Breadcrumb |
 | `/areas/colchester` | Location pillar | Colchester | 5 services | Commercial (local) | 0.8 | Service (area), FAQPage, Breadcrumb |
 | `/areas/ipswich` | Location pillar | Ipswich | 5 services | Commercial (local) | 0.8 | Service (area), FAQPage, Breadcrumb |
 | `/areas/clacton-on-sea` | Location pillar | Clacton-on-Sea | Salt air | Commercial (local) | 0.8 | Service (area), FAQPage, Breadcrumb |
@@ -55,10 +67,10 @@ All 35 URLs are reachable within **2 clicks** of the home page, with no orphans.
 | Service × City pages (`/services/[service]/[city]`, 15–20 URLs) | **Folded into the city pillars.** Each city page has a unique note per service. Standalone pages would fail rule 6: there are no location-tagged reviews or photos. Colchester × service would also cannibalise the service pillars, which already target "{service} Colchester". | Real reviews or job photos tagged to each town. Then publish only those combinations. |
 | Extra towns (Witham, Braintree, Maldon, Harwich, Sudbury, Halstead, Tiptree, West Mersea, Frinton, Walton) | Not published. Coverage is only confirmed for the 4 towns plus "surrounding areas". A page per town would claim coverage the client hasn't confirmed. | The client confirms which towns they regularly serve. |
 | Sub-locations for Ipswich, Clacton, Chelmsford | Not published, per the brief (Colchester only at full depth). | Business volume in those towns. |
-| Ceramic / graphene coating, PPF, machine polish, ozone, leather, pet hair, engine bay pages | Not published. The client hasn't confirmed these as offered services. | The client confirms each one. Then add it to `lib/data/subservices.ts`. |
+| Prices, product brands, coating lifespans, guarantees on the 12 treatment pages added 2026-09-28 | Copy stays generic. The client confirmed the services but not these details. | The client supplies them. Then add them to the matching entry in `lib/data/subservices.ts`. |
 | Pricing page | Not published. No prices are confirmed (see README placeholders). | The client's price list. |
 | Owner bio, certifications (E-E-A-T) | Not published. None supplied. | Name, experience and any certifications from the client. |
-| "Ceramic coating vs wax" comparison | Not published. It implies offering ceramic coating. | Confirmation that ceramic coating is offered. |
+| "Ceramic coating vs wax" comparison | Not yet written. Ceramic coating is now confirmed, so this is unblocked. | Write it as a guide in `lib/data/guides.ts`, linking to the ceramic coating page. |
 | Before/after slider | Not built. The photos are single joined before/after images, not separate before and after shots. Labelled halves plus a lightbox are used instead. | Separate before and after photos of the same job. |
 
 ## Data sources for local facts
