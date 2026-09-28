@@ -7,6 +7,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { BreadcrumbSchema } from "@/components/schema/BreadcrumbSchema";
 import { services } from "@/lib/data/services";
+import { getSubservicesFor } from "@/lib/data/subservices";
 import { siteConfig } from "@/lib/data/site";
 
 const icons = {
@@ -46,23 +47,40 @@ export default function ServicesPage() {
             {services.map((service) => {
               const Icon = icons[service.icon];
               return (
-                <Link
+                <div
                   key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="group flex flex-col rounded-2xl border border-border bg-bg-elevated p-7 transition-colors hover:border-accent/60"
+                  className="group relative flex flex-col rounded-2xl border border-border bg-bg-elevated p-7 transition-colors hover:border-accent/60"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10">
                     <Icon className="h-6 w-6 text-accent" aria-hidden />
                   </div>
-                  <h2 className="mt-5 text-xl font-semibold text-fg">{service.name}</h2>
+                  <h2 className="mt-5 text-xl font-semibold text-fg">
+                    <Link href={`/services/${service.slug}`} className="after:absolute after:inset-0">
+                      {service.name}
+                    </Link>
+                  </h2>
                   <p className="mt-2 text-sm leading-relaxed text-fg-muted">
                     {service.directAnswer}
                   </p>
+                  {getSubservicesFor(service.slug).length > 0 && (
+                    <ul className="relative z-10 mt-4 flex flex-wrap gap-2">
+                      {getSubservicesFor(service.slug).map((sub) => (
+                        <li key={sub.slug}>
+                          <Link
+                            href={`/services/${service.slug}/${sub.slug}`}
+                            className="inline-block rounded-full border border-border-strong px-3 py-1 text-xs font-medium text-fg transition-colors hover:border-accent hover:text-accent"
+                          >
+                            {sub.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                   <span className="mt-6 flex items-center gap-1.5 text-sm font-semibold text-accent">
                     View details &amp; get a quote
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                   </span>
-                </Link>
+                </div>
               );
             })}
           </div>

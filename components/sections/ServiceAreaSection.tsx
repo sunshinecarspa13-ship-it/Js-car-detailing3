@@ -54,6 +54,14 @@ export function ServiceAreaSection() {
             ))}
             .
           </p>
+
+          <Link
+            href="/areas"
+            className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-accent"
+          >
+            See every area we cover
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+          </Link>
         </Reveal>
 
         <MapEmbed

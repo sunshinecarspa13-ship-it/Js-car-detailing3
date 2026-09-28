@@ -1,24 +1,23 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Phone } from "lucide-react";
+import { ChevronDown, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { business } from "@/lib/data/business";
-import { navLinks } from "./nav-links";
+import { cn } from "@/lib/utils/cn";
+import { navItems, type NavGroup } from "./nav-links";
+import { MobileNav } from "./MobileNav";
 
+// Server-rendered so every menu link is in the initial HTML for crawlers.
+// Dropdowns open on hover and keyboard focus with CSS only; the panels stay
+// in the DOM (visibility-hidden) rather than being mounted on demand.
 export function Header() {
-  const [open, setOpen] = useState(false);
-
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between sm:h-20">
         <Link
           href="/"
           className="flex items-center gap-3 text-base font-semibold tracking-tight text-fg sm:text-lg"
-          onClick={() => setOpen(false)}
         >
           <Image
             src="/logo-round.png"
@@ -34,16 +33,26 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-fg-muted transition-colors hover:text-fg"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav aria-label="Main" className="hidden self-stretch lg:flex">
+          <ul className="flex items-center gap-6 xl:gap-7">
+            {navItems.map((item) => (
+              <li key={item.href} className="group relative flex h-full items-center">
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-1 text-sm font-medium text-fg-muted transition-colors hover:text-fg group-focus-within:text-fg"
+                >
+                  {item.label}
+                  {item.groups && (
+                    <ChevronDown
+                      className="h-3.5 w-3.5 transition-transform group-hover:rotate-180 group-focus-within:rotate-180"
+                      aria-hidden
+                    />
+                  )}
+                </Link>
+                {item.groups && <DropdownPanel groups={item.groups} />}
+              </li>
+            ))}
+          </ul>
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
@@ -52,50 +61,80 @@ export function Header() {
             className="flex items-center gap-2 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
           >
             <Phone className="h-4 w-4 text-accent" aria-hidden />
-            {business.phone.display}
+            <span className="hidden xl:inline">{business.phone.display}</span>
+            <span className="sr-only xl:hidden">Call {business.phone.display}</span>
           </a>
           <Button href="/book" size="md">
             Book Now
           </Button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-fg lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <MobileNav items={navItems} phone={business.phone} />
       </Container>
-
-      {open && (
-        <div className="border-t border-border bg-bg lg:hidden">
-          <Container className="flex flex-col gap-1 py-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-base font-medium text-fg-muted transition-colors hover:bg-bg-elevated hover:text-fg"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href={`tel:${business.phone.href}`}
-              className="mt-2 flex items-center gap-2 rounded-lg px-3 py-3 text-base font-medium text-accent"
-            >
-              <Phone className="h-4 w-4" aria-hidden />
-              {business.phone.display}
-            </a>
-            <Button href="/book" className="mt-2 w-full" onClick={() => setOpen(false)}>
-              Book Now
-            </Button>
-          </Container>
-        </div>
-      )}
     </header>
+  );
+}
+
+function DropdownPanel({ groups }: { groups: NavGroup[] }) {
+  const wide = groups.some((group) => group.links.length > 6);
+  return (
+    <div
+      className={cn(
+        "invisible absolute top-full left-1/2 -translate-x-1/2 opacity-0 transition-[opacity,visibility] duration-150",
+        "group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100",
+      )}
+    >
+      <div
+        className={cn(
+          "grid gap-8 rounded-2xl border border-border-strong bg-bg-elevated p-6 shadow-2xl shadow-black/50",
+          wide ? "w-[38rem] grid-cols-[1fr_2fr]" : "w-[34rem] grid-cols-[3fr_2fr]",
+        )}
+      >
+        {groups.map((group) => (
+          <div key={group.heading}>
+            <p className="text-xs font-semibold tracking-[0.15em] text-fg-subtle uppercase">
+              {group.href ? (
+                <Link href={group.href} className="transition-colors hover:text-accent">
+                  {group.heading}
+                </Link>
+              ) : (
+                group.heading
+              )}
+            </p>
+            <ul
+              className={cn(
+                "mt-3 gap-x-6",
+                group.links.length > 6 ? "grid grid-cols-2" : "flex flex-col",
+              )}
+            >
+              {group.links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="block rounded-md py-1.5 text-sm font-medium text-fg transition-colors hover:text-accent"
+                  >
+                    {link.label}
+                  </Link>
+                  {link.children && link.children.length > 0 && (
+                    <ul className="mb-1 ml-3 border-l border-border pl-3">
+                      {link.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            className="block py-1 text-sm text-fg-muted transition-colors hover:text-accent"
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
