@@ -15,5 +15,5 @@ export const siteConfig = {
     "JS Car Detailing Colchester is a fully insured mobile car detailing service rated 5.0★ from 15 Google reviews. Exterior wash, deep clean, interior clean, paint protection, and headlight restoration — 7 days a week, at your home or workplace across Colchester, Ipswich, Clacton-on-Sea, and Chelmsford.",
   // Search-snippet length (≤160 chars) version of `description`.
   metaDescription:
-    "Fully insured mobile car detailing in Colchester, Ipswich, Clacton-on-Sea & Chelmsford. 5.0★ from 15 Google reviews. Open 7 days — we come to you.",
+    "Fully insured mobile car detailing in Colchester, Ipswich, Clacton-on-Sea & Chelmsford. 5.0★ from 15 Google reviews. Call +44 7778 902278 — we come to you.",
 } as const;

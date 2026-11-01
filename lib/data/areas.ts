@@ -32,7 +32,7 @@ export const areas: Area[] = [
       "exterior-wash": "Colchester is home turf, so a regular exterior wash is simple to keep on a routine — the van is rarely more than a few miles away, whether you're in the city centre, a suburb like Stanway or out at Wivenhoe.",
       "deep-clean": "A deep clean is our longest visit, and being based in the city means we can usually offer the widest choice of days for one here — useful when you're getting a car ready to sell or resetting it after a long winter.",
       "interior-clean": "For Colchester flats and terraces where the car is parked on the street, an interior clean is often the easiest service to book: we only need access to the car itself.",
-      "paint-protection": "Paint protection goes on straight after a wash, so in Colchester it's usually booked as part of the same visit as an exterior wash or deep clean.",
+      "paint-protection": "In Colchester, paint protection usually means a ceramic coating — applied straight after a wash or a machine polish in the same visit — with paint protection film available for the panels that face the most stone chips.",
       "headlight-restoration": "Headlight restoration is a short, on-site job — easy to add to any Colchester visit, or book on its own before an MOT."
     },
     faqs: [
@@ -56,13 +56,13 @@ export const areas: Area[] = [
     isBase: true,
     driveTimeFromBase: "Based here",
     metaDescription:
-      "Mobile car detailing in Colchester — washes, deep cleans, interior cleans and paint protection at your home or workplace. Open 7 days a week from 8am.",
+      "Mobile car detailing in Colchester — washes, deep cleans, interior cleans, paint protection and ceramic coating at your home or workplace. Open 7 days from 8am.",
     directAnswer:
       "JS Car Detailing Colchester is based in Colchester, operating from King Edward Quay, and covers the whole city as its home service area. As a fully mobile detailer, appointments are carried out at your home or workplace anywhere in Colchester, seven days a week from 8am.",
     localContext:
       "Colchester — granted city status in 2022 and built on the site of Roman Camulodunum, Britain's first capital — spans everything from the historic centre around Colchester Castle to the surrounding residential areas and the University of Essex campus. As the home base, Colchester sees the shortest response times and the most flexible availability of any area covered.",
     servicesNote:
-      "All five services — exterior wash, deep clean, interior clean, paint protection, and headlight restoration — are available throughout Colchester with no call-out distance to travel.",
+      "All five services — exterior wash, deep clean, interior clean, paint protection, and headlight restoration — are available throughout Colchester with no call-out distance to travel, along with the specialist treatments that sit under them, including ceramic coating, machine polishing and paint protection film.",
   },
   {
     slug: "ipswich",
@@ -94,11 +94,11 @@ export const areas: Area[] = [
     isBase: false,
     driveTimeFromBase: "Approximately 30–40 minutes by road, traffic dependent",
     metaDescription:
-      "Mobile car detailing in Ipswich — exterior washes, deep cleans, interior cleans and paint protection at your home or workplace. Fully insured, 7 days.",
+      "Car detailing in Ipswich — mobile exterior washes, deep cleans, interior cleans and paint protection at your home or workplace. Fully insured. Get a quote.",
     directAnswer:
       "Yes — JS Car Detailing Colchester covers Ipswich as part of its regular mobile service area. The team travels from its Colchester base, roughly 30–40 minutes by road, to carry out exterior washes, deep cleans, interior cleans, paint protection, and headlight restoration at your home or workplace in Ipswich.",
     localContext:
-      "Ipswich, Suffolk's county town, sits just over the county border from Essex and is one of the four towns JS Car Detailing Colchester regularly serves outside its home base. From the waterfront and marina to the surrounding residential estates, mobile detailing means no drive down to Colchester is needed — the service comes to you.",
+      "Ipswich, Suffolk's county town, sits just over the county border from Essex and is one of the four towns JS Car Detailing Colchester regularly serves outside its home base. From the waterfront and marina to the surrounding residential estates, mobile detailing means no drive down to Colchester is needed — the service comes to you. The trip is made up the A12, and Ipswich visits are usually planned as fuller appointments — a deep clean, or a wash combined with paint protection — so the journey covers as much of the car as possible in a single visit. Every service available in Colchester is available in Ipswich, each carried out where the car is parked, at your home or workplace.",
     servicesNote:
       "Paint protection and deep cleans are popular in Ipswich alongside standard exterior washes — get a quote for your vehicle and postcode.",
   },

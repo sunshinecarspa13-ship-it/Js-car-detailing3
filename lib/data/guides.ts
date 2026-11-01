@@ -150,6 +150,7 @@ export const guides: Guide[] = [
     related: [
       { href: "/services/exterior-wash", label: "Mobile Exterior Wash" },
       { href: "/services/exterior-wash/snow-foam-wash", label: "Snow Foam Wash" },
+      { href: "/services/paint-protection/ceramic-coating", label: "Ceramic Coating in Colchester" },
       { href: "/services/interior-clean", label: "Interior Clean" },
       { href: "/areas", label: "Areas we cover" },
     ],
@@ -283,6 +284,7 @@ export const guides: Guide[] = [
       { href: "/areas/clacton-on-sea", label: "Car detailing in Clacton-on-Sea" },
       { href: "/services/exterior-wash", label: "Exterior Wash" },
       { href: "/services/paint-protection", label: "Paint Protection" },
+      { href: "/services/paint-protection/ceramic-coating", label: "Ceramic Coating in Colchester" },
       { href: "/services/deep-clean", label: "Deep Clean" },
     ],
     faqs: [

@@ -793,8 +793,9 @@ export const subservices: Subservice[] = [
     slug: "ceramic-coating",
     parent: "paint-protection",
     name: "Ceramic Coating",
+    seoTitle: "Ceramic Coating in",
     metaDescription:
-      "Mobile ceramic coating in Colchester — a hard-wearing, glossy protective layer bonded to clean, prepared paintwork at your home or workplace.",
+      "Ceramic coating in Colchester, applied at your home or workplace — a hard-wearing, glossy protective layer on fully prepared paintwork. Get a quote.",
     directAnswer:
       "A ceramic coating is a liquid protective layer that bonds to a car's clear coat and cures into a hard, glossy, water-repelling finish that lasts far longer than wax. JS Car Detailing Colchester applies it at your home after the paint has been washed, decontaminated and prepared.",
     sections: [
@@ -824,6 +825,14 @@ export const subservices: Subservice[] = [
         paragraphs: [
           "Lifespan depends on the product used, how the car is washed and how much time it spends outdoors. Consumer-grade coatings are measured in months, professional coatings in years. We'll confirm which coating we recommend for your car, and what to expect from it, when we quote.",
           "To get the most from it, wash the car by hand with a pH-neutral shampoo and avoid automatic brush washes, which wear coatings down quickly.",
+        ],
+      },
+      {
+        heading: "Ceramic coating in Colchester, applied where your car lives",
+        paragraphs: [
+          "You don't need to bring the car anywhere. As a fully mobile service, we apply ceramic coating at your home or workplace anywhere in Colchester — from The Hythe and the city centre to Stanway, Lexden, Highwoods, Myland and Wivenhoe — and across Ipswich, Clacton-on-Sea and Chelmsford.",
+          "Most Colchester coatings are booked on a driveway or in a garage or carport: the car needs to stay dry while the coating cures, so we'll agree a day around the forecast before we start. The preparation described above — the wash, decontamination and machine polishing where the paint needs it — happens on the same visit, so the coating goes onto paint that's properly ready for it.",
+          "If you're not sure whether a coating is right for your car, ask when you get a quote. We'll look at the paint, how you use the car and where it's kept, and say honestly whether a coating, a wax or paint protection film makes more sense.",
         ],
       },
     ],
@@ -859,6 +868,21 @@ export const subservices: Subservice[] = [
         question: "Will a ceramic coating stop scratches and stone chips?",
         answer:
           "No. It resists very light marring, but for protection against stone chips you need paint protection film on the most exposed panels.",
+      },
+      {
+        question: "Do you apply ceramic coating at my home in Colchester?",
+        answer:
+          "Yes. Ceramic coating is a fully mobile service — we apply it at your home or workplace anywhere in Colchester, and across Ipswich, Clacton-on-Sea and Chelmsford. The car needs to stay dry while the coating cures, so a garage or carport helps, and we'll plan the visit around the weather.",
+      },
+      {
+        question: "How long does ceramic coating last?",
+        answer:
+          "It depends on the product used, how the car is washed and how much time it spends outdoors. Consumer-grade coatings are measured in months, professional coatings in years. We'll confirm which coating we recommend for your car, and what to expect from it, when we quote.",
+      },
+      {
+        question: "How much does ceramic coating cost in Colchester?",
+        answer:
+          "Pricing depends on vehicle size and paint condition, and on whether the paint needs machine polishing first — get a quote by phone on +44 7778 902278 or through the contact form.",
       },
     ],
   },

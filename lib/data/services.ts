@@ -8,6 +8,12 @@ export type Service = {
   name: string;
   shortName: string;
   /**
+   * Title-tag lead used instead of `name` when the name alone misses the
+   * search intent — the service template appends " Colchester" to it,
+   * mirroring the Subservice `seoTitle` pattern.
+   */
+  seoTitle?: string;
+  /**
    * 40–60 word direct answer to the implicit search query, meant to be
    * lifted whole into a snippet, AI Overview, or voice answer. No marketing
    * adjectives — lead with the fact.
@@ -19,6 +25,12 @@ export type Service = {
   bullets: string[];
   idealFor: string;
   faqs: Faq[];
+  /**
+   * Sub-services under a different parent that this service naturally leads
+   * into — resolved against lib/data/subservices.ts and rendered as a
+   * RelatedLinks block on the service page (the protection upsell path).
+   */
+  crossLinks?: { parent: string; subservice: string }[];
   icon: "droplets" | "sparkles" | "armchair" | "shield" | "lightbulb";
   /** Authoritative external sources backing a claim on the page. */
   references?: { label: string; href: string; context: string }[];
@@ -29,6 +41,11 @@ export const services: Service[] = [
     slug: "exterior-wash",
     name: "Exterior Wash",
     shortName: "Exterior Wash",
+    seoTitle: "Mobile Exterior Hand Wash in",
+    crossLinks: [
+      { parent: "paint-protection", subservice: "machine-polishing" },
+      { parent: "paint-protection", subservice: "ceramic-coating" },
+    ],
     metaDescription:
       "Mobile exterior hand wash in Colchester — bodywork, wheels, arches and glass cleaned safely at your home or workplace. Fully insured, 7 days. Get a quote.",
     directAnswer:
