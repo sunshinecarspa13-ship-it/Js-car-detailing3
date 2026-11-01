@@ -15,7 +15,7 @@ import { business } from "@/lib/data/business";
 import { getPhotosForService, withServiceNames } from "@/lib/data/gallery";
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { RelatedLinks } from "@/components/content/RelatedLinks";
-import { getSubservicesFor } from "@/lib/data/subservices";
+import { getSubservice, getSubservicesFor } from "@/lib/data/subservices";
 import { guidesLinkingTo } from "@/lib/data/links";
 
 export function generateStaticParams() {
@@ -30,7 +30,7 @@ export async function generateMetadata(
   if (!service) return {};
 
   return pageMetadata({
-    title: `${service.name} Colchester`,
+    title: `${service.seoTitle ?? service.name} Colchester`,
     description: service.metaDescription,
     path: `/services/${service.slug}`,
   });
@@ -50,6 +50,17 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
   const otherServices = services.filter((s) => s.slug !== service.slug);
   const photos = withServiceNames(getPhotosForService(service.slug));
   const subservices = getSubservicesFor(service.slug);
+  // Cross-parent treatments this service leads into (e.g. a wash leading to
+  // polishing and ceramic coating), resolved from the sub-service data so
+  // labels and descriptions stay in sync with the target pages.
+  const crossLinks = (service.crossLinks ?? [])
+    .map((ref) => getSubservice(ref.parent, ref.subservice))
+    .filter((sub): sub is NonNullable<typeof sub> => Boolean(sub))
+    .map((sub) => ({
+      href: `/services/${sub.parent}/${sub.slug}`,
+      label: sub.name,
+      description: sub.metaDescription,
+    }));
   const relatedGuides = guidesLinkingTo(`/services/${service.slug}`);
 
   return (
@@ -122,6 +133,12 @@ export default async function ServicePage(props: PageProps<"/services/[slug]">) 
                     description: sub.metaDescription,
                   }))}
                 />
+              </div>
+            )}
+
+            {crossLinks.length > 0 && (
+              <div className="mt-14">
+                <RelatedLinks title="Protect the finish" links={crossLinks} />
               </div>
             )}
 
